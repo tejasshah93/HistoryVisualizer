@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HiStOrY vIsUaLiZeR..</title>
+  {{response.files.append(URL('static', 'css/history.css'))}}
+  {{include 'web2py_ajax.html'}}
+<meta name="keywords" content="ancient, free css templates, CSS, HTML" />
+<meta name="description" content="Ancient is a free CSS template from templatemo.com" />
+<link href="../static/css/history.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+
+</head>
+<body background='../static/css/images/par.jpg' width="100%" >
+{{include}}
+ 
+ <div id="templatemo_wrapper">
+
+
+ <!--  <span class="bg_top"></span>
+    <span class="bg_bottom"></span>
+ 
+    
+    <div id="templatemo_menu">
+   
+    </div> 
+    
+    <div id="templatemo_header">
+        
+       
+    </div> -->
+ {{=form }}
+
+     
+
+     <h2> {{=A('Main index', _href=URL('index'))}}</h2>
+    </div>           
+ <!--   </div>
+    <div id="templatemo_main_bottom">
+    </div>-->
+</div>
+</body>
+</html>

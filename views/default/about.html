@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Contact</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../static/css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="../static/css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="../static/css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="../static/js/jquery-1.6.js"></script>
+<script type="text/javascript" src="../static/js/cufon-yui.js"></script>
+<script type="text/javascript" src="../static/js/cufon-replace.js"></script> 
+<script type="text/javascript" src="../static/js/Vegur_700.font.js"></script>
+<script type="text/javascript" src="../static/js/Vegur_400.font.js"></script>
+<script type="text/javascript" src="../static/js/Vegur_300.font.js"></script>
+<script type="text/javascript" src="../static/js/atooltip.jquery.js"></script>
+<script type="text/javascript" src="../static/js/script.js"></script>
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js"></script>
+	<style type="text/css">
+		.box1 figure {behavior:url(js/PIE.htc)}
+	</style>
+<![endif]-->
+<!--[if lt IE 7]>
+		<div style='clear:both;text-align:center;position:relative'>
+			<a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" alt="" /></a>
+		</div>
+<![endif]-->
+</head>
+<body id="page5">
+<div class="body1">
+    <div class="main">
+<!-- header -->
+        <header>
+            <div class="wrapper">
+                    <nav>
+                                    </nav>
+                <nav>
+                    <ul id="menu">
+                    	<li><a href="index.html">Home</a></li>
+						<li><a href="longitude1.html">Add to your History</a></li>
+                        <li id="menu_active"><a href="about.html">About Us</a></li>
+                        <li><a href="user.html">Register</a></li>
+                        <li><a href="user.html">Login</a></li>
+                        {{if auth.user_id == 30:}}
+                            <li><a href="http://webchat.freenode.net?nick=user&channels=world-history%2Clocal-history&prompt=1&uio=d4" target=_new >Internet Relay Chat</a></li>
+                            <li><a href="manage.html">Manage events</a></li>
+                            <li><a href="account_control.html">Manage Users</a></li>
+                        {{pass}}
+                        {{if auth.user_id == 31:}}
+                            <li><a href="http://webchat.freenode.net?nick=user&channels=world-history%2Clocal-history&prompt=1&uio=d4" target=_new >Internet Relay Chat</a></li>
+                        {{pass}}
+					</ul>
+				</nav>
+			</div>
+		</header><div class="ic"></div>
+<!-- / header -->
+<!-- content -->
+		<article id="content">
+			<div class="wrapper">
+				<div class="box1">
+					<div class="line1 wrapper">
+						<section class="col1">
+							<h2><strong>O</strong>ur<span>Address</span></h2>
+							<strong class="address">
+								Country:<br>
+								State:<br>
+								City:<br>
+								Zip Code:<br>
+								Telephone:<br><br>
+								E-Mail:<br>
+								Creators:<br><br>
+							</strong>
+							India<br>
+							Andhra Pradesh<br>
+							Hyderabad<br>
+							50032<br>
+							+919052286525<br> +918886142054<br>
+							<a href="mailto:">gamecoders@gmail.com</a>
+							Manish Tejas<br> Sindhu Venessa	<br>
+						</section>
+						<section class="col2 pad_left1">
+							<h2 class="color2"><strong>H</strong>istory <strong>V</strong>isualizer</h2>
+							<p class="pad_bot1">
+								The idea of the project is to have a web-based visualizing tool  which can be used to authorize and also navigate History across time and space . We therefore provide users a visualization tool which should provide an online community that allows people to view, authorize and compare timelines ,history of a place and also its conceptual details. 
+							</p>
+						</section>
+					</div>
+				</div>	
+			</div>
+			<div class="wrapper">
+				<div class="pad_left2 relative">
+					<h4 class="color3"><span>Contact</span>Form</h4>
+					<img src="../static/images/page6_img1.png" alt="" class="img1">
+					<form id="ContactForm">
+						<div>
+							<div class="wrapper"><span>Your Name:</span><input type="text" class="input"></div>
+							<div class="wrapper"><span>Your E-mail:</span><input type="text" class="input"></div>
+							<div class="wrapper"><span>Your Website:</span><input type="text" class="input"></div>
+							<div class="textarea_box"><span>Your Message:</span><textarea name="textarea" cols="1" rows="1"></textarea></div>
+							<a href="#" class="button2 color3" onClick="document.getElementById('ContactForm').submit()">Send</a>
+							<a href="#" class="button2 color3" onClick="document.getElementById('ContactForm').reset()">Clear</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</article>
+<!-- / content -->
+	</div>
+</div>
+<script type="text/javascript">Cufon.now();</script>
+</body>
+</html>

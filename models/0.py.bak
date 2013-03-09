@@ -1,0 +1,19 @@
+from gluon.storage import Storage
+settings = Storage()
+
+settings.migrate = True
+settings.title = 'My New App'
+settings.subtitle = 'powered by web2py'
+settings.author = 'venessa'
+settings.author_email = 'neilvenessatauro@gmail.com'
+settings.keywords = 'me'
+settings.description = ''
+settings.layout_theme = 'Transient'
+settings.database_uri = 'sqlite://storage.sqlite'
+settings.security_key = '03eadd62-2ba1-4f61-ac2a-a30676b46a7f'
+settings.email_server = 'localhost'
+settings.email_sender = 'neilvenessatauro@gmail.com'
+settings.email_login = 'venessa'
+settings.login_method = 'local'
+settings.login_config = ''
+settings.plugins = ['gmap']

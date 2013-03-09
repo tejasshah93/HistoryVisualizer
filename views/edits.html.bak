@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="Creative Studio, XHTML CSS template, free download, web design" />
+<meta name="description" content="Creative Studio is a standard compliant XHTML CSS template from templatemo.com" />
+<link href="../static/css/templatemo_style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{{include}}
+<div id="templatemo_container">
+    <div id="bulb"></div>
+    <div id="templatemo_site_title_bar">    
+        <div id="site_title">
+            <h1>
+             
+                Add to your history
+             
+            </h1>
+        </div>
+    </div> <!-- templatemo_site_title_bar -->
+    
+     <div id="templatemo_menu">
+        <ul>
+            <li><a href="index.html" class="current fast">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="timeline.html">Navigate through time</a></li>
+            <li><a href="space.html" target="_parent">navigate through space</a></li>
+            <li><a href="both.html">Navigate through both</a></li>
+        </ul>
+    </div> <!-- end of menu -->
+    
+    <div id="templatemo_content"> 
+
+        <div class="section_w670">
+       
+            
+        </div>
+        
+        <div class="cleaner_h40"></div>
+        
+       <div class="section_w670">
+        
+            <h2></h2>
+            <marquee>
+            <img class="image_wrapper fl_image" src="../static/css/images/COLLAG1.jpg" width="200" height="200" />
+                         <img class="image_wrapper fl_image" src="../static/css/images/compass.jpg" width="200" height="200" />
+                          <img class="image_wrapper fl_image" src="../static/css/images/col.jpg" width="200" height="200" />
+                           <img class="image_wrapper fl_image" src="../static/css/images/face.jpg" width="200" height="200" />
+     </marquee>     
+            <div class="cleaner"></div>
+     
+        <div class="cleaner"></div>
+       </div> <!-- end of templatemo_content -->
+  
+
+</div> <!-- end of container -->
+</body>
+</html>

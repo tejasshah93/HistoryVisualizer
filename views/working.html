@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../static/css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="../static/css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="../static/css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="../static/js/jquery-1.6.js"></script>
+<script type="text/javascript" src="../static/js/cufon-yui.js"></script>
+<script type="text/javascript" src="../static/js/cufon-replace.js"></script> 
+<script type="text/javascript" src="../static/js/Vegur_700.font.js"></script>
+<script type="text/javascript" src="../static/js/Vegur_400.font.js"></script>
+<script type="text/javascript" src="../static/js/Vegur_300.font.js"></script>
+<script type="text/javascript" src="../static/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../static/js/tms-0.3.js"></script>
+<script type="text/javascript" src="../static/js/tms_presets.js"></script>
+<script type="text/javascript" src="../static/js/backgroundPosition.js"></script>
+<script type="text/javascript" src="../static/js/atooltip.jquery.js"></script>
+<script type="text/javascript" src="../static/js/script.js"></script>
+</head>
+
+<body id="page1">
+<div class="body1">
+    <div class="main">
+<!-- header -->
+        <header>
+            <div class="wrapper">
+                    <nav>
+                                    </nav>
+                <nav>
+                    <ul id="menu">
+                        <li id="menu_active"><a href="index.html">Home</a></li>
+                        <li><a href="longitude1.html">Add to your History</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="user.html">Register</a></li>
+                        <li><a href="user.html">Login</a></li>
+                        {{if auth.user_id == 30:}}
+                            <li><a href="http://webchat.freenode.net?nick=user&channels=world-history%2Clocal-history&prompt=1&uio=d4" target=_new >Internet Relay Chat</a></li>
+                            <li><a href="manage.html">Manage events</a></li>
+                            <li><a href="account_control.html">Manage Users</a></li>
+                        {{pass}}
+                        {{if auth.user_id == 31:}}
+                            <li><a href="http://webchat.freenode.net?nick=user&channels=world-history%2Clocal-history&prompt=1&uio=d4" target=_new >Internet Relay Chat</a></li>
+                            <li><a href="manage.html">Manage events</a></li>
+                        {{pass}}
+                    </ul>
+                </nav>
+            </div>
+            <div class="slider">
+                <ul class="items">
+                    <li>
+                        <img src="../static/css/images/moon.jpg" >
+                        <div class="banner">
+                            <div class="wrapper"><strong>"Relive the lives ...</strong></div>
+                            <div class="wrapper"><span>of your ancestors"</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="../static/css/images/we.jpg" >
+                        <div class="banner">
+                            <div class="wrapper"><strong>“Soak in  the </strong></div>
+                            <div class="wrapper"><strong>forgotten past"</strong></div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="../static/css/images/en.jpg">
+                        <div class="banner">
+                            <div class="wrapper"><strong>“Discover the secrets </strong></div>
+                            <div class="wrapper"><strong>buried  in the sands of time"</strong></div>
+                        </div>
+                    </li>
+                                        <li>
+                        <img src="../static/css/images/taj.jpg" >
+                        <div class="banner">
+                            <div class="wrapper"><strong>“Retrace the footsteps </strong></div>
+                                                        <div class="wrapper"><strong>of those who </strong></div>
+                            <div class="wrapper"><strong>Lived ,Loved and Hoped before you"</strong></div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="pagination">
+                    <li id="banner1"><a onclick="location.href='space1.html'" href="space1.html"><span>Navigate Through</span>Space</a></li>
+                    <li id="banner2"><a onclick="location.href='timeline1.html'" href="timeline1.html"><span>Navigate Through</span>Time</a></li>
+                    <li id="banner3"><a onclick="location.href='space_time.html'" href="space_time.html">Space & <br> Time</a></li>
+                </ul>
+            </div>
+        </header><div class="ic"></div>
+<!-- / header -->
+<!-- content -->
+        <article id="content">
+            <div class="wrapper">
+                <div class="box1">
+                    <div class="line1"><div class="line2 wrapper">
+                        
+                        <section class="col1 pad_left1" >
+                            <h2 class="color2"><strong>E</strong>gyptian Civilization<span>(3100-332 B.C)</span></h2>
+                            <div  class="pad_bot1"><figure><img src="../static/css/images/eygpt.jpg" width="100%" height="200"></figure></div>
+                            Ancient Egypt--a land of mysteries.No other civilization has so captured the imagination of scholars and laypeople alike. Mystery surrounds its origins, its religion and its monumental architecture.The Egyptian pyramids are the most famous of all the ancient monuments , the only remaining wonder of the seven wonders   of the ancient world.
+                        </section>
+                        <section class="col1 pad_left1">
+                            <h2 class="color3"><strong>M</strong>ongol Empire <span>(1206–1368)</span></h2>
+                            <div class="pad_bot1"><figure><img src="../static/css/images/mon.jpg" width="100%" height="200" ></figure></div>
+                             The Mongol Empire emerged from the unification of Mongol and Turkic tribes of historical Mongolia under the leadership of Genghis Khan. Genghis Khan was proclaimed ruler of all Mongols in 1206. The empire grew rapidly under his rule and then under the rule of his descendants, who sent invasions in every direction.The vast transcontinental empire which connected the east with the west with an enforced Pax Mongolica allowed trade, technologies, commodities and ideologies to be disseminated and exchanged across Eurasia.
+                        </section>
+<section class="col1">
+                            <h2><strong>W</strong>orld War II<span>(1939-1945)</span></h2>
+                            <div class="pad_bot1"><figure><img src="../static/css/images/bomb.jpg" width="100%" height="200"></figure></div> It involved a vast majority of the world's nations—including all of the great powers—eventually forming two opposing military alliances: the Allies and the Axis. It was the most widespread war in history, with more than 100 million people serving in military units .
+                            
+                            
+                        </section>
+                    </div></div>
+                </div>  
+            </div>
+            <div class="wrapper">
+                
+                <h4 class="quot">
+                Life must be lived forward, but it can only be understood backward. <img src="../static/css/images/quot2.png" alt="" ><em>-Søren Kierkegaard</em>
+                </h3>
+                              
+            </div>
+            <div class="wrapper">
+                
+            </div>
+        </article>
+<!-- / content -->
+    </div>
+</div>
+<script type="text/javascript">Cufon.now();</script>
+<script>
+$(window).load(function(){
+    $('.slider')._TMS({
+        preset:'zabor',
+        easing:'easeOutQuad',
+        duration:800,
+        pagination:true,
+        banners:true,
+        waitBannerAnimation:false,
+        slideshow:6000,
+        bannerShow:function(banner){
+            banner
+                .css({right:'-700px'})
+                .stop()
+                .animate({right:'0'},600, 'easeOutExpo')
+        },
+        bannerHide:function(banner){
+            banner
+                .stop()
+                .animate({right:'-700'},600,'easeOutExpo')
+        }
+    })
+    $('.pagination li').hover(function(){
+        if (!$(this).hasClass('current')) {
+            $(this).find('a').stop().animate({backgroundPosition:'0 0'},600,'easeOutExpo', function(){$(this).parent().css({backgroundPosition:'-20px 0'})});
+        }
+    },function(){
+        if (!$(this).hasClass('current')) {
+            $(this).css({backgroundPosition:'0 0'}).find('a').stop().animate({backgroundPosition:'-250px 0'},600,'easeOutExpo');
+        }
+    })
+})
+</script>
+</body>
+</html>

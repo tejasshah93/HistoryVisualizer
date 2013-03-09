@@ -1,0 +1,729 @@
+{{import urllib}}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HiStOrY vIsUaLiZeR..</title>
+  {{response.files.append(URL('static', 'css/history.css'))}}
+  {{include 'web2py_ajax.html'}}
+<meta name="keywords" content="ancient, free css templates, CSS, HTML" />
+<meta name="description" content="Ancient is a free CSS template from templatemo.com" />
+<link href="../static/css/history.css" rel="stylesheet" type="text/css" />
+<style>
+#box {
+
+    position: relative;
+    width: 1030px;
+    height: 150px;
+    background-color:indigo;
+    top: 740px  0px;
+    overflow: hidden;
+}
+#box1 {
+
+    position: relative;
+    width: 1030px;
+    height: 25px;
+    background-color:grey;
+
+    left:100;
+    top: 5px;
+    overflow: hidden;
+}
+#box2 {
+
+    position: relative;
+    width: 1030px;
+    height: 25px;
+    background-color:white;
+
+
+    top: 22px;
+    overflow: hidden;
+}
+#box3 {
+
+    position: relative;
+    width: 250px;
+    height: 25px;
+    background-color:grey;
+
+
+    top: 50px;
+    overflow: hidden;
+}
+#holder {
+    position: absolute;
+    width: auto;
+    height: 400px;
+}
+.boxes {
+    position: relative;
+    width: 398px;
+    height: 400px;
+    border-right: 2px solid blue;
+    float: left;
+}
+.year {
+    position: relative;
+    float: left;
+    border-right: 1px solid white;
+    height: 13px;
+    min-width: 9px;
+    
+}
+.year_no {
+    position: relative;
+    float: left;
+    border-right: 1px solid white;
+    height: 13px;
+    min-width: 99px;
+    
+}
+.year_no1 {
+    position: relative;
+    float: left;
+    border-right: 1px solid white;
+    height: 13px;
+    min-width: 0px;
+    
+}
+.year:first-child {
+    border-left: 1px solid red;
+}
+.year1 {
+    position: relative;
+    float: left;
+    border-right: 1px solid yellow;
+    height: 25px;
+    min-width: 9px;
+}
+.year1:first-child {
+    border-left: 1px solid white;
+}
+.year5 {
+    position: relative;
+    float: left;
+    border-right: 1px solid white;
+    height: 18px;
+    min-width: 9px;
+}
+#trackWrapper {
+    position: absolute;
+    top: 10px;
+    width: auto;
+}
+#trackWrapper .track {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    top: 21px;
+    width: auto;
+}
+#trackWrapper .slider1, #trackWrapper .slider2 {
+    position:relative;
+}
+#trackWrapper .slider1 {
+    background-color: green;
+    width: 8px;
+    height: 20px; 
+    top: 0px;
+    left: 0px;
+}
+#trackWrapper .slider2 {
+    background-color: black;
+    width: 12px;
+    height: 10px;
+    top: 55px;
+    left: 220px;
+    /* 2000
+
+    display: none; 
+    */2000
+}
+#msg {
+    position: absolute;
+    left: 480px;
+    top: 80px;
+    height: 1.0em;
+}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type='text/javascript'>
+
+$(function() {
+    function log(x){
+        var logSwitch = false;
+        if(logSwitch) { console.log(x); }
+    }
+
+    //Put numbers in the boxes for testing
+    $(".boxes").each(function(i) {
+        $(this).text(i);
+    });
+
+    function courseFineSlider($trackWrapper, $holder, sensitivityDivider) {
+      map1=load();
+        var $slider1 = $trackWrapper.find(".slider1"),
+            $slider2 = $trackWrapper.find(".slider2"),
+            $track = $trackWrapper.find(".track"),
+            $boxes = $(".boxes"),
+            $year = $(".year");
+        var $slider = null;
+        var trackLength = $track.width();// - $year.width() / 2;
+        trackLength=trackLength-21;
+        var startX = null;
+        var sliderOffSet = null;
+        var _pos1 = 0;
+        var ePos = 0;
+
+        sensitivityDivider = (!sensitivityDivider) ? 10 : sensitivityDivider;
+
+        $holder.width($boxes.outerWidth() * $boxes.length);
+        var holderScale = $boxes.outerWidth() * ($boxes.length - 1);
+
+        function hold(e) {
+            log('hold');
+            e.preventDefault();
+            $slider = $(e.target);
+            $(window).on('mousemove', $slider, move);
+            startX = e.clientX;
+            sliderOffSet = parseInt($slider.css('left'));
+            _pos1 = getPos($slider1);
+            e.returnValue = false;
+        }
+        
+        function release(e) {
+         
+            if(!$slider) return;
+            log('release');
+            if($slider.get(0) === $slider2.get(0)) {//if it's the orange slider
+//document.getElementById("check1").innerHTML=document.getElementById("cursorX").value;
+ //       var y=document.getElementById("cursorX").value;
+
+
+                //setPos($slider1, ePos);//adjust green according to any movement in orange
+                setPos($slider2, 0.5, true);//recenter the orange slider
+       
+            }
+            $slider = null;
+            $(window).off('mousemove');
+            
+        }
+        function move(e) {
+            //console.log('move');
+            e.preventDefault();
+            var trueSliderX = e.pageX - $trackWrapper.get(0).offsetLeft;
+    //        document.getElementById("finding").innerHTML=trueSliderX-200;
+            setPos($slider, applyLimits(0, (trueSliderX-200) / trackLength, 1));
+            //$holder.css('left', shape(sliderPos()) + 'px'); // *** totally linear ***
+            $holder.css('left', -holderScale * shape2(sliderPos()) + 'px'); // *** non-linear - slows down at the decade boundaries ***
+        }
+        // *** Equations ***
+        function sliderPos() {
+            var pos1 = getPos($slider1);//green position (0 to 1)
+            var pos2 = getPos($slider2);//orange position (0 to 1)
+            if($slider.get(0) === $slider1.get(0)) {//if it's the green slider
+                ePos = applyLimits(0, (pos1 + (pos2 - 0.5) / sensitivityDivider), 1);
+              setupmarke(map1);
+
+            }
+
+            else {
+                ePos = applyLimits(0, (_pos1 + (pos2 - 0.5) / sensitivityDivider), 1);
+                               for(var k=0;k<10;k++)
+      {
+          
+          document.getElementById('check'+k).innerHTML=(Number(document.getElementById("cu").value)+(k*100));
+       }
+                
+            }
+            return ePos;//effective position of green, taking orange into account
+        }
+
+        var LINEAR = function(x1, y1) {//Namespace pattern to keep the $(function(){...}) closure uncluttered
+            function Line(m, c) {//Constructor
+                this.calc = function(x) {
+                    return m * x + c;
+                };
+            }
+            var m1 = y1/x1;
+            var m2 = (1-y1)/(1-x1);
+            var c1 = 0;
+            var c2 = y1 - m2 * x1;
+            return {
+                x1: x1,
+                y1: y1,
+                line_1: new Line(m1, c1),
+                line_2: new Line(m2, c2)
+            };
+        }(0.9, 0.9);// change these params as required. 
+        /*
+     * First param:  Determines the leading edge of the "sluggish zone". 0.7 is about right for the test data.
+     * Second param: Determines the height of the two slopes at their intersection. ie. where steep changes to shallow. 
+     * Try playing with the second param in the range 0.7 (completely linear) to 0.999999 (comatose). 
+     * If the value of the 2nd param is set to something less than the first param, then the "zone" will be more sensitive rather than more sluggish.
+         */
+
+        // *** Shaping functions ***
+        function shape(x) {
+            return x;
+        }
+        function shape2(x) { //0...1
+            var c = 4, //The number of cycles (decades)
+                n = x * c,//0...4
+                d = Math.floor(n),//"decade" //0, 1, 2, 3, 4
+                r = n - d,//remainder //0
+                y = (r < LINEAR.x1) ? LINEAR.line_1.calc(r) : LINEAR.line_2.calc(r),
+                rtn = (y + d) / c;//unscaled return value
+/*
+            inspect([
+                'x: ' + x.toFixed(2),
+                '<br>n: ' + n.toFixed(5),
+                '<br>d: ' + d,
+                '<br>r: ' + r.toFixed(2),
+                '<br>y: ' + y.toFixed(2),
+                '<br>rtn: ' + rtn.toFixed(2)]);
+*/
+            return rtn;
+        }
+
+        // *** Utilitiy functions ***
+        function applyLimits(min, x, max) {
+            return Math.max(min, Math.min(max, x));
+        }
+        function getPos($sl) {
+            return (parseInt($sl.css('left')) + $sl.width() / 2) / trackLength;
+        }
+        function setPos($sl, val, animate) {
+          var val1=val;
+
+            val = (val * trackLength) - ($sl.width() / 2);
+            if(val1)
+            {
+             // val=val-200;
+            }
+            document.getElementById('cu').value=val-5;
+            if(animate) { $sl.animate({left: val}, 'fast'); }
+            else { $sl.css({left: val}); }
+        }
+        function inspect(arr){ //for debugging
+            $("#msg").html(arr.join(', '));
+        }
+
+        setPos($slider1, 0);//center the green slider
+        setPos($slider2, 0.5);//center the orange slider
+
+        $slider1.on('mousedown', hold);
+        $slider2.on('mousedown', hold);
+        $(window).on('mouseup', release);
+    }
+    var x = new courseFineSlider($("#trackWrapper"), $('#holder'), 5);
+});
+</script>
+<script language="javascript" type="text/javascript">
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+
+<!-- for tabbed max content-->
+        <script type="text/javascript">
+         //copy from http://gmaps-samples.googlecode.com/svn/trunk/versionchecker.html?v=2.86
+          function getURLParam(name) {
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.href);
+            return (results === null ? "" : decodeURIComponent(results[1]));
+          }
+          var v = getURLParam('v')||'2';
+          document.write('<script src="http://maps.google.com/maps?file=api&amp;v='+v+'&amp;key=ABQIAAAAjU0EJWnWPMv7oQ-jjS7dYxQGj0PqsCtxKvarsoS-iqLdqZSKfxRdmoPmGl7Y9335WLC36wIGYa6o5Q" type="text/javascript"><'+ '/script>');
+        </script>
+       
+        <script type="text/javascript">
+            document.write('<script type="text/javascript" src="../static/js/tabbedmaxcontent' + (document.location.search.indexOf('packed') > -1 ? '_packed' : '') + '.js"><' + '/script>');
+        </script>
+<!--tabbed max content header done -->
+
+<!-- Custom Search-->
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017280809417751048621:ppm6uxprogs';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+<!-- Custom Search header done-->
+
+</head>
+<body background="../static/css/images/grey.jpg">
+{{include}}
+<div id="templatemo_wrapper">
+
+    <!--span class="bg_top"></span-->
+   <!-- <span class="bg_bottom"></span>-->
+    
+    <div id="templatemo_menu">
+        <ul>
+          <li><a href="timeline1.html">Time</a></li>
+          <li><a href="space1.html">Space</a></li>
+          <li><a href="space_time.html">Space/Time</a></li>
+          <li><a href="longitude1.html">Add History</a></li>
+          <li class="last"><a href="index.html">Index</a></li>
+        </ul>
+    </div> <!-- end of menu -->
+    
+    <!--div id="templatemo_header"-->
+        <!--div id="site_title"><h1><a href="http://www.iiit.ac.in">vIsUaLiZeR..</a></h1></div-->
+        
+    <!--/div--> <!-- end of header -->
+    
+    <!--div id="templatemo_main"-->
+
+    <script>
+document.getElementById("postcard_latitude").value="shukla"
+</script>
+   {{if request.vars.focus_date:}}
+    {{xval=request.vars.focus_date}}
+{{else:}}
+    {{xval=1400}}
+{{pass}}
+    <script type="text/javascript">
+           var gran=1;
+      function change()
+      {
+        if(gran==1)
+        {
+          gran=2;
+        }
+        else if(gran==2)
+        {
+          gran=10;
+        }
+     //   document.getElementById("finding").innerHTML=gran;
+       for(var k=0;k<11;k++)
+      {
+        var bz=Number(document.getElementById("check0").innerHTML);
+          
+          document.getElementById('check'+k).innerHTML=((k*(100/gran))+bz);
+       }
+       setupmarke(map);
+
+      }
+            function change1()
+      {
+        if(gran==10)
+        {
+          gran=2;
+        }
+        else if(gran==2)
+        {
+          gran=1;
+        }
+     //   document.getElementById("finding").innerHTML=gran;
+               for(var k=0;k<11;k++)
+      {
+        var bz=Number(document.getElementById("check0").innerHTML);
+          
+          document.getElementById('check'+k).innerHTML=((k*(100/gran))+bz);
+       }
+       setupmarke(map);
+      } 
+           function setupmarke(map)
+      {
+               var baseIcon = new GIcon();
+        baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        baseIcon.iconSize = new GSize(20, 34);
+        baseIcon.shadowSize = new GSize(37, 34);
+        baseIcon.iconAnchor = new GPoint(9, 34);
+        baseIcon.infoWindowAnchor = new GPoint(9, 2);
+        baseIcon.infoShadowAnchor = new GPoint(18, 14);
+        var blueIcon = new GIcon();
+        blueIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+        blueIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        blueIcon.iconSize = new GSize(37, 34);
+        blueIcon.shadowSize = new GSize(37, 34);
+        blueIcon.iconAnchor = new GPoint(9, 34);
+        blueIcon.infoWindowAnchor = new GPoint(9, 2);
+        blueIcon.infoShadowAnchor = new GPoint(18, 14);
+        map.clearOverlays();
+               {{for row in postcards:}}{{if row.latitude and row.longitude:}}
+          var point = new GLatLng({{=row.latitude}},{{=row.longitude}});
+          var x=60;
+          var y=document.getElementById("cu").value;
+          {{import datetime}}
+          {{z=row.start_date.year}}
+          {{z=z-xval}}
+          if((y/gran)>{{=z}})
+          {
+            
+          map.addOverlay(createMarker(map, blueIcon, point, 0, 'Title: {{=row.Title.replace("'","\\'")}}<br/>{{=row.from_nickname.replace("'","\\'")}} from {{=row.from_location.replace("'","\\'")}}<br/><img src="{{=URL('download',args=row.image)}}" width="200px"/><br/><i>"{{=XML((row.comment or '').replace("'","\\'").replace('\r','').replace('\n','<br/>'),sanitize=True)}}"</i>',
+            '{{=row.Title.replace("'","\\'")}}',
+            '{{=row.id}}',
+            'Title: {{=row.Title.replace("'","\\'")}}<br/><img src="{{=URL('download',args=row.image)}}" width="200px" align="left"/><br/><i>"{{=XML((row.comment or '').replace("'","\\'").replace('\r','').replace('\n','<br/>'),sanitize=True)}}"</i><br/>'
+            ));
+        }
+        {{pass}}{{pass}}
+
+      }
+               function createMarker(map,blueIcon, point, i, message, head, rowid, inner) {
+              // Set up our GMarkerOptions object
+           if(i==0) markerOptions = { icon:blueIcon };
+           else markerOptions= {}
+           var marker = new GMarker(point, markerOptions);
+           map.addOverlay(marker);
+           GEvent.addListener(marker, 'click', function(latlng){
+//            marker.openInfoWindowHtml(message);
+              var msg = message;
+              var sum = head;
+              var tabs = [
+              new MaxContentTab('Information about the event', inner),
+              new MaxContentTab('Related links', '<iframe src="./trial_result.html?cref=http%3A%2F%2Fwww.guha.com%2Fcref_cse.xml&cof=FORID%3A9&q=' + head + '&sa=Search&siteurl=127.0.0.1%3A8000%2Fmaps_recent%2Fdefault%2Ftrial.html&ref=&ss=611j113415j12" height="275px" width="650px"><p>Your browser does not support iframes.</p></iframe>'),
+              new MaxContentTab('Rate the event', '<iframe src="./rating.html?query=' + rowid + '" height="275px" width="650px"><p>Your browser does not support iframes.</p></iframe>'),
+              new MaxContentTab('Edit the event', '<iframe src="./edit_event.html/' + rowid + '" height="275px" width="650px"><p>Your browser does not support iframes.</p></iframe>')];
+              marker.openMaxContentTabsHtml(map, msg, sum, tabs, {
+                  maxTitle: "More Marker Info"
+                    
+              });
+            });
+           return marker;
+         }
+    //<![CDATA[
+    t=8;
+    function clock()
+{
+//var d=new Date();
+//var t=d.toLocaleTimeString();
+//t++;
+//document.getElementById("Search").value=t;
+}
+    function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+        map.addControl(new GSmallMapControl());
+        map.addControl(new GMapTypeControl());
+        map.setCenter(new GLatLng(0,0), 1);
+
+        // Create a base icon for all of our markers that specifies the
+        // shadow, icon dimensions, etc.
+
+
+
+   //      setupmarke(map);
+
+
+         return map;
+     }
+    }
+    //]]>
+    </script>
+    <div id="leavespace" style="width: 400px; height:200px"></div> 
+<center>
+    <div id="map" style="width: 1000px; height: 510px"></div>
+    <script>
+    //
+
+    </script>
+</center>
+<!--form>
+  <input type="number" name="focus_date" id="focus">
+  <input type="submit" value="Focus">
+</form-->
+<!--h1 id="finding">sadsadas</h1-->
+<div id='box'>
+<!--div id="msg"></div-->
+<div id="trackWrapper">
+    <div class='slider1'></div>
+    <div class='slider2'></div>
+    <ul class='track'>
+ {{xxo=5}}
+
+<div id='box1'>
+      <script>  
+      function scalemove()
+      {
+      var x={{=xval}};
+      for(var i=0;i<11;i++)
+      {
+        document.write("<li class='year1'></li>");
+
+        
+       if(i==10)
+       {
+        break;
+       }
+       for(var j=0;j<9;j++)
+      {
+        if(j==4)
+        {
+            document.write("<li class='year5'></li>");
+        }
+
+
+        else
+        {
+        document.write("<li class='year'></li>");
+      }
+       }
+       }
+       
+      }
+      scalemove(); 
+
+        </script>
+</div>
+        
+         
+    </ul>
+    <div id="box2">   
+      <script>  
+  
+     
+      for(var i=0;i<11;i++)
+      {
+      if(i==10)
+      {
+       document.write("<h6 class='year_no1' id='check"+[i]+"'>"+((i*100)+1400) +"</h6>"); 
+        break;
+      }
+        document.write("<h6 class='year_no' id='check"+[i]+"'>"+((i*100)+1400) +"</h6>");
+
+       }
+        
+
+        </script>
+    </div>
+    <center>
+      <script>
+
+     
+      </script>
+    <div id="box3"><h4><button onclick="change()">|+|</button>--------------------<button onclick="change1()">|-|</button></h4>
+    </div>
+  </center>
+</div>
+
+
+
+</div>
+
+    <div id="leavespace" style="width: 400px; height:100px"></div> 
+        
+          
+    <div class="cleaner"></div>
+    </div> <!-- end of main -->
+
+    <!--div id="templatemo_main_bottom"></div-->
+    
+    <div  style="text-align: center";>
+      Copyright © 2012 <a href="#">GameCoders Inc.</a>
+        <div class="cleaner"></div>
+    </div>
+
+</div> <!-- end of wrapper -->
+<script type="text/javascript">
+//  map1=load();
+ //   var inti=self.setInterval(function(){clock()},1000);
+ //  var inti=self.setInterval(function(){setupmarke(map1)},5000);
+       
+    //        document.getElementById("start").value=44;
+    //(map1);
+window.onload = init;
+function init() {
+  if (window.Event) {
+  document.captureEvents(Event.MOUSEMOVE);
+  }
+
+
+  document.onmouseup = getCursorXY;
+
+}
+
+function getCursorXY(e) {
+
+  document.getElementById('cursorX').value = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
+  document.getElementById('cursorY').value = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+if(document.getElementById("cursorY").value>733 && document.getElementById("cursorY").value<750)
+{
+ 
+//setupmarke(map1);
+}
+}
+</script>
+
+
+
+<input type="hidden" id="cursorX" size="3">
+<input type="hidden" id="cursorY" size="3"> 
+<input type="hidden" id="cu" size="3">
+
+
+<!--/html>
+<!DOCTYPE html-->
+
+
+
+<!--div id='box'>
+    <div id="holder">
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+    </div>
+</div-->
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+{{extend 'layoutr.html'}}
+<html>
+<body>
+{{left_sidebar_enabled,right_sidebar_enabled=False,False}}
+{{=form}}
+{{ctr = 0}}
+{{x = 0}}
+{{avg = 0.0}}
+{{q = request.vars.query}}
+{{q=int(q)}}
+
+{{if len(products):}}
+  {{ flag={} }}
+  {{for row in products:}}
+    {{ var = db.auth_user[row.created_by].first_name }}
+    {{ if not flag.has_key(var) : }}
+      {{if row.event_id == q and row.rating:}}
+        {{x = x + row.rating }}
+        {{ctr = ctr + 1}}
+      {{pass}}
+
+      {{if ctr > 0:}}
+        {{ avg = x*1.0/ctr }}
+      {{pass}}
+      {{avg=round(avg,2)}}
+      {{ flag[var] = request.vars.query }}
+      {{if avg:}}
+        {{up = db(db.product.event_id==q).select().first()}}
+        {{up.update_record(average=avg)}}
+      {{pass}}
+      
+    {{else:}}
+      {{response.flash = 'You have already rated it'}}    
+    {{pass}}
+  {{pass}}
+  {{for row in products:}}
+    {{if row.event_id == q and row.average:}}
+      Average rating {{=row.average}}
+    {{pass}}
+  {{pass}}
+{{else:}}
+  <h4>No ratings yet</h4>
+{{pass}}
+</body>
+</html>

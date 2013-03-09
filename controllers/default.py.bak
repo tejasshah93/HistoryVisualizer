@@ -1,0 +1,93 @@
+def index():
+    if auth.user:
+        postcard = db(db.history.created_by==-1).select().first()    
+    postcards = db(db.history.id>0).select()
+    return dict(postcards=postcards)  
+
+def space1():
+   
+    if auth.user:
+        postcard = db(db.history.created_by==-1).select().first()    
+    postcards = db(db.history.id>0).select() 
+    return dict(postcards=postcards)
+
+@auth.requires_login() 
+def longitude1():
+    lat="23.456768"
+    longt="103.35976"
+    if auth.user:
+        postcard = db(db.history.created_by==-1).select().first()
+        #db.postcard.longitude.default=request.vars.lonbox
+        #db.postcard.latitude.default=longt
+        #form.vars.latitude.default = 'fieldvalue'      
+       # form= crud.create(db.postcard,next=URL(r=request))
+        #form.vars.latitude.default = 'fieldvalue'
+        form = SQLFORM(db.history)
+        if form.process(session=None, formname='test').accepted:
+            response.flash = 'form accepted'
+        elif form.errors:
+            response.flash = 'form has errors'
+        else:
+            response.flash = 'please fill the form'
+       
+    else:
+        form = None    
+    postcards = db(db.history.id>0).select()
+    return dict(postcards=postcards)
+def user():
+    """
+    exposes:
+    http://..../[app]/default/user/login 
+    http://..../[app]/default/user/logout
+    http://..../[app]/default/user/register
+    http://..../[app]/default/user/profile
+    http://..../[app]/default/user/retrieve_password
+    http://..../[app]/default/user/change_password
+    use @auth.requires_login()
+        @auth.requires_membership('group name')
+        @auth.requires_permission('read','table name',record_id)
+    to decorate functions that need access control
+    """
+    return dict(form=auth())
+
+
+def download():
+    """
+    allows downloading of uploaded files
+    http://..../[app]/default/download/[filename]
+    """
+    return response.download(request,db)
+
+
+def call():
+    """
+    exposes services. for example:
+    http://..../[app]/default/call/jsonrpc
+    decorate with @services.jsonrpc the functions to expose
+    supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
+    """
+    session.forget()
+    return service()
+
+def timeline1():
+ form=SQLFORM(db.history)
+ if form.process().accepted:
+    response.flash = 'your data is uploaded'
+ data = db(db.history).select()
+ return dict(form=form, data=data)
+ 
+ 
+ 
+def check():
+ form=SQLFORM(db.history)
+ if form.process().accepted:
+    response.flash = 'your data is uploaded'
+ data = db(db.history).select()
+ return dict(form=form, data=data)
+
+def trial():
+    return dict()
+
+def trial_result():
+    return dict()
+

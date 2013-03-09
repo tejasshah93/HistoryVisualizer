@@ -1,0 +1,212 @@
+timestamp: 2012-09-16T16:21:04.673008
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2012-09-16T16:21:04.907892
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2012-09-16T16:21:05.106472
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2012-09-16T16:21:05.308276
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2012-09-16T16:21:05.506799
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2012-09-16T16:21:05.734541
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2012-09-16T16:21:05.953453
+CREATE TABLE postcard(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    from_nickname CHAR(512),
+    from_location CHAR(512),
+    latitude DOUBLE,
+    longitude DOUBLE,
+    image CHAR(512),
+    comment TEXT
+);
+success!
+timestamp: 2012-10-12T12:20:37.567125
+ALTER TABLE postcard ADD time TIMESTAMP;
+timestamp: 2012-10-12T16:01:54.839812
+ALTER TABLE postcard ADD title TEXT;
+timestamp: 2012-10-14T10:59:55.669212
+CREATE TABLE edit_his(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    space CHAR(512),
+    times CHAR(512),
+    description TEXT,
+    others CHAR(512),
+    keywords CHAR(512)
+);
+success!
+timestamp: 2012-10-14T11:11:01.428664
+CREATE TABLE edit(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    space CHAR(512),
+    times CHAR(512),
+    description TEXT,
+    others CHAR(512),
+    keywords CHAR(512)
+);
+success!
+timestamp: 2012-10-14T11:28:26.283020
+ALTER TABLE auth_user ADD username CHAR(512);
+timestamp: 2012-10-14T11:28:26.520253
+ALTER TABLE auth_user ADD created_on TIMESTAMP;
+timestamp: 2012-10-14T11:28:26.703217
+ALTER TABLE auth_user ADD modified_on TIMESTAMP;
+timestamp: 2012-10-16T22:39:31.862856
+CREATE TABLE timeline(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    start_date DATE,
+    end_date DATE,
+    title CHAR(512),
+    description CHAR(512),
+    date_limit CHAR(512),
+    Importance INTEGER
+);
+success!
+timestamp: 2012-10-17T13:25:15.459910
+CREATE TABLE postcard1(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    Time DATE,
+    Title CHAR(512),
+    from_nickname CHAR(512),
+    from_location CHAR(512),
+    latitude DOUBLE,
+    longitude DOUBLE,
+    image CHAR(512),
+    comment TEXT
+);
+success!
+timestamp: 2012-10-17T13:27:39.570646
+CREATE TABLE timeline1(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    start_date DATE,
+    end_date DATE,
+    title CHAR(512),
+    description CHAR(512),
+    date_limit CHAR(512),
+    Importance INTEGER
+);
+success!
+timestamp: 2012-10-17T13:30:26.255534
+ALTER TABLE timeline1 ADD created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE;
+timestamp: 2012-10-17T13:50:17.784707
+CREATE TABLE history(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_by CHAR(512),
+    created_on TIMESTAMP,
+    start_date DATE,
+    end_date DATE,
+    Title CHAR(512),
+    from_nickname CHAR(512),
+    from_location CHAR(512),
+    latitude DOUBLE,
+    longitude DOUBLE,
+    Importance INTEGER,
+    image CHAR(512),
+    comment TEXT
+);
+success!
+timestamp: 2012-11-14T18:26:38.815335
+CREATE TABLE plugin_rating_master(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tablename CHAR(512),
+    record_id INTEGER,
+    rating DOUBLE,
+    counter INTEGER
+);
+success!
+timestamp: 2012-11-14T18:26:39.208146
+CREATE TABLE plugin_rating_aux(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    master INTEGER REFERENCES plugin_rating_master(id) ON DELETE CASCADE,
+    rating DOUBLE,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2012-11-14T18:50:06.000704
+CREATE TABLE product(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    rating INTEGER
+);
+success!
+timestamp: 2012-11-14T21:29:05.501656
+ALTER TABLE history ADD rating INTEGER;
+timestamp: 2012-11-14T21:43:21.946671
+CREATE TABLE histor(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_by CHAR(512),
+    created_on TIMESTAMP,
+    start_date DATE,
+    end_date DATE,
+    Title CHAR(512),
+    from_nickname CHAR(512),
+    from_location CHAR(512),
+    latitude DOUBLE,
+    longitude DOUBLE,
+    importance INTEGER,
+    rating INTEGER,
+    image CHAR(512),
+    comment TEXT
+);
+success!
+timestamp: 2012-11-15T00:21:59.310898
+ALTER TABLE product ADD average DOUBLE;
+timestamp: 2012-11-15T00:50:43.253599
+ALTER TABLE product ADD event_id CHAR(512);
+timestamp: 2012-11-15T00:50:43.599367
+ALTER TABLE product ADD created_by CHAR(512);
+timestamp: 2012-11-15T01:51:15.412295
+ALTER TABLE history ADD average DOUBLE;
+timestamp: 2012-11-16T21:40:59.965897
+CREATE TABLE allowed(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usrid CHAR(512),
+    priv CHAR(512)
+);
+success!

@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<link rel="stylesheet" type="text/css" media="screen" href="../static/css/style.css" />
+</head>
+
+<body>
+
+<div id="container" >
+
+<div id="header">
+<h2><pre>
+
+
+            
+         
+</div>
+
+
+<div id="sideheader"></div>
+
+<div id="left_column" >
+
+
+<div class="left_column_boxes">
+
+<h4>Navigation</h4>
+<div >
+
+<ul text-size="14">
+<li><a href="index.html">Home</a></li>
+<li><a href="edit.html">edit</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="left_column_boxes">
+
+<h4>News</h4>
+<dl>
+<dt class="news">This is a definiton list</dt>
+<dd>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed quam.  Nullam gravida aliquet odio. Phasellus ullamcorper tincidunt orci.  Praesent vel purus. Sed porttitor. Proin porttitor suscipit urna. Morbi  rhoncus posuere orci.</dd>
+
+<dt class="news">Lists are cool</dt>
+<dd>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed quam.  Nullam gravida aliquet odio. Phasellus ullamcorper tincidunt orci.  Praesent vel purus. Sed porttitor. Proin porttitor suscipit urna. Morbi  rhoncus posuere orci.</dd>
+</dl>
+
+</div>
+
+<div class="left_column_boxes">
+
+<h4>Contact us</h4>
+<form id="form1" method="post" class="contact_us" action="">
+    <p>
+      <label>Name
+      <input type="text" class="fields_contact_us" name="textfield" />
+
+    </label>
+
+    <label>E-mail
+    <input type="text" class="fields_contact_us" name="textfield1" />
+	</label>
+	<label>
+    Your question:
+    <textarea name="textarea" cols="" rows=""></textarea>
+	</label>
+    <label>
+
+    <input type="submit" class="submit_button_contact" name="Submit1" value="Submit" />
+    </label></p>
+  </form>
+  
+</div>
+  
+  <p class="center">Created by Dieter Schneider 2007 <a href="http://www.csstemplateheaven.com">www.csstemplateheaven.com</a></p>
+
+
+</div>
+
+<div id="content">
+
+
+   
+ <h2>{{=T( request.args(0).replace('_',' ').capitalize() )}}</h2>
+<div id="web2py_user_form">
+  {{=form}}
+  {{if request.args(0)=='login':}}
+  {{if not 'register' in auth.settings.actions_disabled:}}
+  <br/>
+  <a href="{{=URL(args='register')}}">{{=T('Register')}}</a>
+  {{pass}}
+  {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
+  <br/>
+  <a href="{{=URL(args='request_reset_password')}}">{{=T('Lost Password')}}</a>
+  {{pass}}
+  {{pass}}
+</div>
+
+	
+	
+</div>
+</div>
+
+<script language="javascript">
+
+
+
+
+</body>
+</html>

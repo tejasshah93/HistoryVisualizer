@@ -1,0 +1,167 @@
+{{import urllib}}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HiStOrY vIsUaLiZeR..</title>
+  {{response.files.append(URL('static', 'css/history.css'))}}
+  {{include 'web2py_ajax.html'}}
+<meta name="keywords" content="ancient, free css templates, CSS, HTML" />
+<meta name="description" content="Ancient is a free CSS template from templatemo.com" />
+<link href="../static/css/history.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+
+<!-- for tabbed max content-->
+        <script type="text/javascript">
+         //copy from http://gmaps-samples.googlecode.com/svn/trunk/versionchecker.html?v=2.86
+          function getURLParam(name) {
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.href);
+            return (results === null ? "" : decodeURIComponent(results[1]));
+          }
+          var v = getURLParam('v')||'2';
+          document.write('<script src="http://maps.google.com/maps?file=api&amp;v='+v+'&amp;key=ABQIAAAAjU0EJWnWPMv7oQ-jjS7dYxQGj0PqsCtxKvarsoS-iqLdqZSKfxRdmoPmGl7Y9335WLC36wIGYa6o5Q" type="text/javascript"><'+ '/script>');
+        </script>
+       
+        <script type="text/javascript">
+            document.write('<script type="text/javascript" src="../static/js/tabbedmaxcontent' + (document.location.search.indexOf('packed') > -1 ? '_packed' : '') + '.js"><' + '/script>');
+        </script>
+<!--tabbed max content header done -->
+
+<!-- Custom Search-->
+<!-- Put the following javascript before the closing </head> tag. -->
+
+<script>
+  (function() {
+    var cx = '017280809417751048621:ppm6uxprogs';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+<!-- Custom Search header done-->
+
+</head>
+<body background="../static/css/images/grey.jpg">
+{{include}}
+<div id="templatemo_wrapper">
+
+    <!--span class="bg_top"></span-->
+   <!-- <span class="bg_bottom"></span>-->
+    
+    <div id="templatemo_menu">
+        <ul>
+          <li><a href="timeline1.html">Time</a></li>
+          <li><a href="space1.html">Space</a></li>
+          <li><a href="space_time.html">Space/Time</a></li>
+          <li><a href="longitude1.html">Add History</a></li>
+          <li class="last"><a href="index.html">Index</a></li>
+        </ul>
+    </div> <!-- end of menu -->
+    
+    <!--div id="templatemo_header"-->
+        <!--div id="site_title"><h1><a href="http://www.iiit.ac.in">vIsUaLiZeR..</a></h1></div-->
+        
+    <!--/div--> <!-- end of header -->
+    
+    <!--div id="templatemo_main"-->
+
+    <script>
+document.getElementById("postcard_latitude").value="shukla"
+</script>
+  
+    <script type="text/javascript">
+    //<![CDATA[
+    function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+        map.addControl(new GSmallMapControl());
+        map.addControl(new GMapTypeControl());
+        map.setCenter(new GLatLng(0,0), 1);
+
+        // Create a base icon for all of our markers that specifies the
+        // shadow, icon dimensions, etc.
+        var baseIcon = new GIcon();
+        baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        baseIcon.iconSize = new GSize(20, 34);
+        baseIcon.shadowSize = new GSize(37, 34);
+        baseIcon.iconAnchor = new GPoint(9, 34);
+        baseIcon.infoWindowAnchor = new GPoint(9, 2);
+        baseIcon.infoShadowAnchor = new GPoint(18, 14);
+        var blueIcon = new GIcon();
+        blueIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+        blueIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        blueIcon.iconSize = new GSize(37, 34);
+        blueIcon.shadowSize = new GSize(37, 34);
+        blueIcon.iconAnchor = new GPoint(9, 34);
+        blueIcon.infoWindowAnchor = new GPoint(9, 2);
+        blueIcon.infoShadowAnchor = new GPoint(18, 14);
+
+        function createMarker(point, i, message, head, rowid, inner) {
+           // Set up our GMarkerOptions object
+           if(i==0) markerOptions = { icon:blueIcon };
+           else markerOptions= {}
+           var marker = new GMarker(point, markerOptions);
+           map.addOverlay(marker);
+           GEvent.addListener(marker, 'click', function(latlng){
+//            marker.openInfoWindowHtml(message);
+              var msg = message;
+              var sum = head;
+              var tabs = [
+              new MaxContentTab('Information about the event', inner),
+              new MaxContentTab('Related links', '<iframe src="./trial_result.html?cref=http%3A%2F%2Fwww.guha.com%2Fcref_cse.xml&cof=FORID%3A9&q=' + head + '&sa=Search&siteurl=127.0.0.1%3A8000%2Fmaps_recent%2Fdefault%2Ftrial.html&ref=&ss=611j113415j12" height="275px" width="650px"><p>Your browser does not support iframes.</p></iframe>'),
+              new MaxContentTab('Rate the event', '<iframe src="./rating.html?query=' + rowid + '" height="275px" width="650px"><p>Your browser does not support iframes.</p></iframe>'),
+              new MaxContentTab('Edit the event', '<iframe src="./edit_event.html/' + rowid + '" height="275px" width="650px"><p>Your browser does not support iframes.</p></iframe>')];
+              marker.openMaxContentTabsHtml(map, msg, sum, tabs, {
+                  maxTitle: "More Information About The Event"                    
+              });
+            });
+           return marker;
+         }
+
+ 
+        {{for row in postcards:}}{{if row.latitude and row.longitude:}}
+          var point = new GLatLng({{=row.latitude}},{{=row.longitude}});
+          map.addOverlay(createMarker(point, 0, 'Title: {{=row.Title.replace("'","\\'")}}<br/>{{=row.from_nickname.replace("'","\\'")}} from {{=row.from_location.replace("'","\\'")}}<br/><img src="{{=URL('download',args=row.image)}}" width="200px"/><br/><i>"{{=XML((row.comment or '').replace("'","\\'").replace('\r','').replace('\n','<br/>'),sanitize=True)}}"</i>',
+            '{{=row.Title.replace("'","\\'")}}',
+            '{{=row.id}}',
+            'Title: {{=row.Title.replace("'","\\'")}}<br/><img src="{{=URL('download',args=row.image)}}" width="200px" align="left"/><br/><i>"{{=XML((row.comment or '').replace("'","\\'").replace('\r','').replace('\n','<br/>'),sanitize=True)}}"</i><br/>'
+            ));
+        {{pass}}{{pass}}
+     }
+    }
+    //]]>
+    </script>
+    
+    <div id="leavespace" style="width: 400px; height:200px"></div> 
+<center>
+    <div id="map" style="width: 1000px; height: 510px"></div>
+    <script>load();</script>
+</center>
+    <div id="leavespace" style="width: 400px; height:100px"></div> 
+        
+          
+    <div class="cleaner"></div>
+    </div> <!-- end of main -->
+
+    <!--div id="templatemo_main_bottom"></div-->
+    <div  style="text-align: center";>
+      Copyright © 2012 <a href="#">GameCoders Inc.</a>
+        <div class="cleaner"></div>
+    </div>
+
+</div> <!-- end of wrapper -->
+
+</body>
+</html>
